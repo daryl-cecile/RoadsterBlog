@@ -1,0 +1,17 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2017",
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "es2017.object",
+      "es2015.collection",
+      "es2015.core"
+    ]
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
