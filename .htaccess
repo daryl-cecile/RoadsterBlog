@@ -1,0 +1,9 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !(resource|.well-known)
+RewriteRule ^([^\\]+)/? index.php?url=$1 [L,QSA]
+
+ExpiresActive On
+php_value upload_max_filesize 30M
+php_value post_max_size 30M
+php_value allow_url_fopen On

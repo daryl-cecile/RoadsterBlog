@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <database>
+        <host>localhost</host>
+        <user>root</user>
+        <pass>root</pass>
+        <name>PFNotts19</name>
+        <port>8889</port>
+    </database>
+</config>
