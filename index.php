@@ -39,5 +39,9 @@ include_once $_SERVER['DOCUMENT_ROOT'] . "/support/repository/UserRepository.php
 // Create service provider
 $ServiceProvider = new NSServiceProvider();
 
+var_dump($ServiceProvider->Config);
+
+exit();
+
 // Start Service
 $ServiceProvider->startService();
