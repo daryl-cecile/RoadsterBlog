@@ -25,8 +25,6 @@ class NSServiceProvider
         $this->UserRepository = new UserRepository();
 
         $this->ViewManager = new NSViewManager();
-
-        $this->Config = (new NSConfig())->config;
     }
 
     function startService(){

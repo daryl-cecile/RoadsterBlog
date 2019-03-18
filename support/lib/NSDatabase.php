@@ -20,14 +20,14 @@ class NSDatabase extends mysqli
 
     function __construct($charset=null)
     {
-        global $ServiceProvider;
+       $Config = (new NSConfig())->config;
 
         parent::__construct(
-            $ServiceProvider->Config->database->host, // Host
-            $ServiceProvider->Config->database->user, // Username
-            $ServiceProvider->Config->database->pass, // Password
-            $ServiceProvider->Config->database->name, // Database Name
-            (int)$ServiceProvider->Config->database->port  // Connection Port
+            $Config->database->host, // Host
+            $Config->database->user, // Username
+            $Config->database->pass, // Password
+            $Config->database->name, // Database Name
+            (int)$Config->database->port  // Connection Port
         );
 
         if ( mysqli_connect_errno() ){

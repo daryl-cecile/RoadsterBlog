@@ -60,4 +60,21 @@ class ArticleRepository extends Repository
 
         return $m;
     }
+
+    /**
+     * @return ArticleModel[]
+     */
+    function getAll(){
+        $collection = [];
+        $rows = $this->_getAll("Articles");
+
+        foreach ($rows as $row){
+            // populate new model
+            $m = new ArticleModel();
+            $m->loadValues($row);
+            $collection[] = $m;
+        }
+
+        return $collection;
+    }
 }

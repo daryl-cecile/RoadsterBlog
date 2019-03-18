@@ -9,6 +9,7 @@
 
 Tools::DependsOn("/repository/IRepository.php");
 Tools::DependsOn("/models/Model.php");
+Tools::DependsOn("/models/ViewModel.php");
 
 class Repository implements IRepository
 {
@@ -92,6 +93,11 @@ class Repository implements IRepository
         ])->GET_FIRST();
 
         return $row;
+    }
+
+    function _getAll($tableName){
+        $rows = $this->db->BEGIN()->SELECT('*')->FROM($tableName)->GET_ALL();
+        return $rows;
     }
 
 }

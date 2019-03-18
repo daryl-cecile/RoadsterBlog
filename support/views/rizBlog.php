@@ -1,5 +1,12 @@
 <?php
+/**
+ * @var ViewModel $Model
+ * @var NSServiceProvider $ServiceProvider
+ */
 
+$articleId = $Model->data['article_id'] ?? null;
+$isEdit = ($articleId ?? false) !== false;
+$blogPost = $isEdit ? $ServiceProvider->ArticleRepository->get($articleId) : null;
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,7 +14,7 @@
     <meta charset="utf-8">
  
     <!-- Include external CSS. -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
     <link href='https://fonts.googleapis.com/css?family=Allerta' rel='stylesheet'>
 
@@ -25,10 +32,14 @@
         <div class="blog-roll-panel">
             <h2>Blog Roll</h2>
             <ul>
-                <li>First Post Alert!</li>
-                <li>Fancy Blog Name</li>
+                <?php
+                    $articles = $ServiceProvider->ArticleRepository->getAll();
+                    foreach ($articles as $article){
+                        echo "<li id='$article->id'><a href='/article/edit/$article->id'>$article->Title</a></li>";
+                    }
+                ?>
             </ul>
-            <button></button>
+            <button onclick="location='/article/add'"></button>
 
         </div>
         
@@ -38,11 +49,11 @@
 
         <form action="save" method="POST">
             <h2 class="title">Title:</h2><br>
-            <input type="text" class="title" title="title">
-
+            <input type="text" class="title" title="title" value="<?= $isEdit ? $blogPost->Title : "" ?>">
+            <input type="hidden" name="id" value="<?= $isEdit ? $blogPost->id : null ?> ">
             <!-- Create a tag that we will use as the editable area. -->
             <!-- You can use a div tag as well. -->
-            <textarea class="editor-content" title="content"></textarea>
+            <textarea class="editor-content" title="content"><?= $isEdit ? $blogPost->Body : "" ?></textarea>
             <button class="submit">Submit</button>
         </form>
 
